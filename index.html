@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>1 Month of Us</title>
+<style>
+:root{--bg:#fff5f7;--fg:#4a1d2e;--muted:#9a6275;--accent:#e63e6d;--accent2:#ff9bb3;--card:#ffffff;--line:#f6c9d6;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#1d0f16;--fg:#ffe3ea;--muted:#d49aae;--accent:#ff5c8a;--accent2:#a83a5c;--card:#2b1621;--line:#4a2536}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#1d0f16;--fg:#ffe3ea;--muted:#d49aae;--accent:#ff5c8a;--accent2:#a83a5c;--card:#2b1621;--line:#4a2536}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:Georgia,"Times New Roman",serif;min-height:100vh;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:10}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;display:flex;gap:6px;justify-content:center;flex-wrap:wrap;padding:10px;background:var(--bg);border-bottom:1px solid var(--line)}
+nav a{font:600 14px system-ui,sans-serif;color:var(--muted);text-decoration:none;padding:8px 14px;border-radius:99px}
+nav a.on{background:var(--accent);color:#fff}
+main{max-width:760px;margin:0 auto;padding:24px 18px 60px}
+section{display:none;animation:in .5s ease}
+section.on{display:block}
+@keyframes in{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+h1{font-size:clamp(34px,8vw,56px);margin:.2em 0;line-height:1.1;text-align:center}
+h2{font-size:30px;text-align:center;margin:.2em 0 .4em}
+p.sub{text-align:center;color:var(--muted);font-style:italic;margin:0 0 20px}
+.big{font-size:80px;text-align:center;animation:beat 1.2s infinite}
+@keyframes beat{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}
+.count{display:flex;gap:10px;justify-content:center;margin:22px 0;flex-wrap:wrap}
+.count div{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px 16px;min-width:76px;text-align:center}
+.count b{display:block;font-size:30px;color:var(--accent)}
+.count span{font:12px system-ui,sans-serif;color:var(--muted)}
+.btn{display:block;margin:18px auto;background:var(--accent);color:#fff;border:0;border-radius:99px;padding:14px 28px;font:600 16px system-ui,sans-serif;cursor:pointer;text-decoration:none;text-align:center;width:fit-content}
+.btn:active{transform:scale(.96)}
+.tl{position:relative;margin-left:14px;border-left:3px solid var(--line);padding-left:20px}
+.tl .m{margin-bottom:14px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 16px;cursor:pointer;position:relative}
+.tl .m::before{content:"";position:absolute;left:-31px;top:18px;width:15px;height:15px;border-radius:50%;background:var(--accent);border:3px solid var(--bg)}
+.tl h3{margin:0;font-size:18px}
+.tl .m p{margin:8px 0 0;display:none;color:var(--muted);line-height:1.5}
+.tl .m.open p{display:block}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.card{height:150px;perspective:600px;cursor:pointer}
+.card i{position:absolute;inset:0;transition:transform .6s;transform-style:preserve-3d;display:block}
+.card.f i{transform:rotateY(180deg)}
+.card u{position:absolute;inset:0;backface-visibility:hidden;border-radius:16px;display:flex;align-items:center;justify-content:center;text-align:center;padding:12px;text-decoration:none;font-size:15px;line-height:1.35}
+.card .a{background:var(--accent);color:#fff;font-size:38px;font-weight:bold}
+.card .b{background:var(--card);border:2px solid var(--accent2);transform:rotateY(180deg)}
+.card{position:relative}
+.env{width:min(300px,80%);margin:20px auto;text-align:center;font-size:90px;cursor:pointer;transition:transform .3s}
+.env:hover{transform:rotate(-4deg) scale(1.05)}
+.letter{display:none;background:var(--card);border:1px solid var(--line);border-radius:6px;padding:26px 24px;line-height:1.8;font-size:18px;white-space:pre-wrap;box-shadow:0 8px 30px rgba(230,62,109,.15);min-height:200px}
+.letter.on{display:block}
+#arena{position:relative;height:340px;background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;touch-action:manipulation}
+.h{position:absolute;bottom:-50px;font-size:38px;cursor:pointer;user-select:none;animation:up linear forwards}
+@keyframes up{to{transform:translateY(-420px)}}
+.poem{text-align:center;background:var(--card);border:1px solid var(--line);border-radius:6px;padding:28px 20px;font-size:20px;line-height:1.9;font-style:italic;box-shadow:0 8px 30px rgba(230,62,109,.15)}
+.poem span{display:block;opacity:0;animation:in .9s forwards}
+#win a.btn{margin-top:14px}
+.score{text-align:center;font:600 20px system-ui,sans-serif;margin:12px 0;color:var(--accent)}
+.pop{position:fixed;font-size:26px;pointer-events:none;z-index:20;animation:pop 1.4s ease-out forwards}
+@keyframes pop{to{transform:translate(var(--x),var(--y)) rotate(360deg);opacity:0}}
+#win{display:none;text-align:center;background:var(--card);border:2px dashed var(--accent);border-radius:16px;padding:20px;margin-top:14px;font-size:18px;line-height:1.6}
+footer{text-align:center;color:var(--muted);font-size:13px;padding:10px 0 20px}
+</style>
+</head>
+<body>
+<nav id="nav">
+<a href="#home">Home</a><a href="#story">Our Story</a><a href="#reasons">Why I Love You</a><a href="#letter">Letter</a><a href="#poem">Poem</a><a href="#play">Play</a>
+</nav>
+<main>
+
+<section id="home">
+<div class="big">💖</div>
+<h1>Happy 1 Month,<br><span class="who">My Love</span></h1>
+<p class="sub" id="homeline"></p>
+<div class="count" id="count"></div>
+<a class="btn" href="#story">Take a walk through us →</a>
+</section>
+
+<section id="story">
+<h2>Our Story</h2>
+<p class="sub">Tap a moment to open it.</p>
+<div class="tl" id="tl"></div>
+</section>
+
+<section id="reasons">
+<h2>Why I Love You</h2>
+<p class="sub">Tap each card to flip it.</p>
+<div class="grid" id="grid"></div>
+</section>
+
+<section id="letter">
+<h2>A Letter For You</h2>
+<p class="sub">Tap the envelope.</p>
+<div class="env" id="env">💌</div>
+<div class="letter" id="lt"></div>
+</section>
+
+<section id="poem">
+<h2 id="ptitle"></h2>
+<p class="sub">Written just for you.</p>
+<div class="poem" id="poemtxt"></div>
+</section>
+
+<section id="play">
+<h2>Catch the Hearts</h2>
+<p class="sub">Catch the hearts to unlock a surprise.</p>
+<div class="score">Hearts: <span id="sc">0</span> / <span id="tg"></span></div>
+<div id="arena"></div>
+<button class="btn" id="go">Start</button>
+<div id="win"><div id="winmsg"></div><a class="btn" id="song" target="_blank" rel="noopener" style="display:none"></a></div>
+</section>
+
+</main>
+<footer>Made with love, just for you 💗</footer>
+
+<script>
+/* =====================================================================
+   ✏️  WRITE YOUR OWN TEXT HERE  (everything you need to edit is in this box)
+   - Keep the quote marks "..." or backticks `...` around your text.
+   - Backticks `...` let you write several lines / paragraphs freely.
+   ===================================================================== */
+
+// 1) Her name (shows on the Home page) and your name (signs the letter)
+const HER = "Aditi";
+const ME = "Yaduraj";
+
+// 2) The day you got together (YYYY-MM-DD). Runs the live counter on Home.
+const START = "2026-10-21";
+
+// 3) HOME PAGE: the line under "Happy 1 Month"
+const HOME_LINE = "One month with you to rest of life with you";
+
+// 4) OUR STORY PAGE: one box per moment. Format: ["Label", "Title", "Your paragraph"]
+//    Each moment is its own [ ... ], and there is a comma between moments.
+const MOMENTS = [
+  ["The start", "Our story just began", "Our story just started baby, everything about us is new, we are still figuring out each other. The one thing i already figured out is that i love you"],
+  ["Our hurry", "Like the world was ending", "We came in a relationship like we were in hurry, like the world was about to end, like we dont want to lose each other before even getting."],
+  ["Our first days", "What a quick journey", "First day we talked, second day i proposed and we become each others, third day we talked about marriage and fourth day we were talking about sex and stuff. what a quick journey we had"],
+  ["Forever", "Quick start, no quick end", "Quick start does not mean the quick end, we will be together till death make us apart."]
+];
+
+// 5) WHY I LOVE YOU PAGE: one flip card per reason. Add as many as you want.
+const REASONS = [
+  "Reason 1: Your cute, beautiful, lovable face.",
+  "Reason 2: Your smartness, boldness.",
+  "Reason 3: The way you treat me.",
+  "Reason 4: Your efforts ",
+  "Reason 5: How i behave with you",
+  "Reason 6: Your voice ",
+  "Reason 7: Everything about you ",
+  "Reason 8: Your kamar",
+  "Reason 9: Your Figure"
+];
+
+// 6) LETTER PAGE: your full love letter (opens when she taps the envelope)
+//    Note: ${HER} automatically becomes her name. Don't put other words inside ${ }.
+const LETTER = `My Everything ${HER},
+
+Esa nahi hai ki hame mile kuch jyada din ho gaye hain lekin fir bhi mai tumhare liye itna sure hoon jaise sagar nadiyon ke liye hote hain, mai ese tumhara intezaar karta hun 
+jaise sagar karte hain nadiyon ka, tumhare alawa mujhe kisi aur ka sochna bhi paap lagne laga hai, tumhare alawa mujhe koi deserve nahi karta.
+tum hona mere liye ek rahat hai, tumhara hona mujhe jeevan mai apne liye kuch karne ki umeed deta hai. TUmhara ye sochna ki tumne khudko itni jaldi mere hawale kar diya hai to
+kahin main tumhe kam keemati na samjun, ye bilkul bekar baat hai, mai aur tumhe kam kimti, tum mere liye anmol ho meri aditi, tumko mai apne se upar rakhta hun,
+tumko mai sabse upar rakhta hun. Tumse kiye hue saare vaade sachhe hain meri jaan, aur mai baat ka pakka insaan hun maine kah diya to kah diya, mai apne saare vaade nibhaunga 
+mai apni life ko bahut behtar banaunga, tumko proud hoga ki tumne mujhe chuna. 
+
+Tumhe mere andar kamiyan nahi dikhti tumne aaj bola tha ki i am mr. perfect, mai apne andar kamiyan nahi maanta, lekin mujhe pata hai ki vo hain aur maine meri sabhi kamiyan tumhe bhi 
+dikhai hain, lekin phir bhi tum mujhe itna maanti ho, ye mujhe bahut jyada motivate karta hai, ye mera pyar tumhare liye aur badhata hai. 
+
+Ek din tum meri ho aur hamre bich ki ye dooriyan mit jaaengi uss din mere liye saare dukh mit jaaenge, meri liye udasi jaisa kuch nahi rahega, meri mayushi
+ki dawai hamesha mere sath rahegi. 
+
+Mai tumse hamesha ese hi pyar karunga, mai tumhara hi rahunga aur tum meri.
+ham kabhi ek dusre se door nahi honge.
+tum mere liye vardan ban kar aayi ho, tum mere ab tak ke dukhon ke badle mai mil rahi khusi ho, jo mujhe ab tak nahi mila uska hisab jod kar tumhe bheja gaya hai.
+Tum mera sabse kimti Inam ho.
+Tum meri ho.
+
+Forever yours,
+Mr. Serious 💖`;
+
+// 7) POEM PAGE: write your poem, one line per line
+const POEM_TITLE = "For You";
+const POEM = `Kamal karti ho
+Tum jaise mujse baat karti ho
+Main sun loon tumhare apsabd bhi
+Jab tum sabdon mai ras bharti ho 
+Kamal karti ho 
+
+Kamal karti ho
+Tum jab sajti ho 
+Jam jaati hain meri putliyan tum par
+Jab tum shringar karti ho
+Kamal karti ho
+
+Kamal karti ho
+Jab tum saanse leti ho
+Fail jaati hai hawa mai mahak
+Jab tum aahen bharti ho
+Kamal karti ho 
+
+Kamal karti ho 
+Jab tum mera naam leti ho
+Main nahi rahta hoon hos mai 
+Jab tum mujse baat karti ho
+Kamal karti ho
+
+Kamal kari ho 
+ meri lakh kamiyon ke baad bhi mere sath rahti ho
+Kya tum bhi mujse pyar karti ho
+Kamal karti ho 
+Kamal karti ho`;
+
+// 8) GAME: how many hearts she must catch, the winning message, and your song
+const TARGET = 10;
+const WIN_MESSAGE = "Mera DIl bhi ese hi jeeta tha tumne. 💕";
+const SONG_TITLE = "🎵 Listen to these songs";
+const SONG_URL = "https://youtube.com/playlist?list=PLTW1jRnARfC4&si=hbV5oGuaAszOTqBC";  // paste the YouTube / Spotify link between the quotes (button stays hidden until you do)
+
+/* ===================== END OF THE PART YOU EDIT ===================== */
+
+document.querySelectorAll(".who").forEach(e=>e.textContent=HER);
+document.querySelectorAll(".me").forEach(e=>e.textContent=ME);
+document.getElementById("homeline").textContent=HOME_LINE;
+document.getElementById("tg").textContent=TARGET;
+document.getElementById("winmsg").textContent=WIN_MESSAGE;
+if(SONG_URL){const a=document.getElementById("song");a.href=SONG_URL;a.textContent=SONG_TITLE;a.style.display="block"}
+document.getElementById("ptitle").textContent=POEM_TITLE;
+document.getElementById("poemtxt").innerHTML=POEM.split("\n").map((l,i)=>"<span style='animation-delay:"+(i*0.7)+"s'>"+l.replace(/</g,"&lt;")+"</span>").join("");
+
+/* routing */
+const pages=["home","story","reasons","letter","poem","play"];
+function route(){
+  let h=(location.hash||"#home").slice(1); if(!pages.includes(h)) h="home";
+  pages.forEach(p=>document.getElementById(p).classList.toggle("on",p===h));
+  document.querySelectorAll("nav a").forEach(a=>a.classList.toggle("on",a.getAttribute("href")==="#"+h));
+  window.scrollTo(0,0);
+  if(h!=="play") stop();
+}
+addEventListener("hashchange",route);
+
+/* counter */
+function tick(){
+  const d=Math.max(0,Date.now()-new Date(START+"T00:00:00").getTime());
+  const v=[Math.floor(d/864e5),Math.floor(d/36e5)%24,Math.floor(d/6e4)%60,Math.floor(d/1e3)%60];
+  document.getElementById("count").innerHTML=["Days","Hours","Minutes","Seconds"].map((l,i)=>"<div><b>"+v[i]+"</b><span>"+l+"</span></div>").join("");
+}
+tick(); setInterval(tick,1000);
+
+/* timeline */
+document.getElementById("tl").innerHTML=MOMENTS.map(m=>"<div class='m'><h3>"+m[0]+": "+m[1]+"</h3><p>"+m[2].replace(/</g,"&lt;")+"</p></div>").join("");
+document.querySelectorAll(".tl .m").forEach(el=>el.onclick=()=>{el.classList.toggle("open");if(el.classList.contains("open"))burst(el,["💗","✨"],5)});
+
+/* reasons */
+document.getElementById("grid").innerHTML=REASONS.map((r,i)=>"<div class='card'><i><u class='a'>"+(i+1)+"</u><u class='b'>"+r.replace(/</g,"&lt;")+"</u></i></div>").join("");
+document.querySelectorAll(".card").forEach(c=>c.onclick=()=>c.classList.toggle("f"));
+
+/* letter */
+let typing=false;
+document.getElementById("env").onclick=function(){
+  if(typing) return; typing=true;
+  const lt=document.getElementById("lt"); lt.classList.add("on"); lt.textContent=""; this.style.display="none";
+  let i=0; const step=Math.max(1,Math.ceil(LETTER.length/600));
+  const fin=()=>{clearInterval(t);lt.textContent=LETTER;burst(lt,["💖","💌","🌹"],12)};
+  const t=setInterval(()=>{i+=step; if(i>=LETTER.length) fin(); else lt.textContent=LETTER.slice(0,i)},30);
+  lt.onclick=fin;
+};
+
+/* game */
+let timer=null,score=0;
+const arena=document.getElementById("arena");
+function stop(){clearInterval(timer);timer=null;arena.innerHTML=""}
+document.getElementById("go").onclick=function(){
+  stop(); score=0; document.getElementById("sc").textContent=0; document.getElementById("win").style.display="none";
+  this.textContent="Restart";
+  timer=setInterval(()=>{
+    const h=document.createElement("div"); h.className="h"; h.textContent=["💖","💗","💕","❤️","💘"][Math.floor(Math.random()*5)];
+    h.style.left=Math.random()*(arena.clientWidth-50)+"px"; h.style.animationDuration=(2.5+Math.random()*2)+"s";
+    h.onclick=()=>{ h.remove(); document.getElementById("sc").textContent=++score; burst(h,["✨"],3);
+      if(score>=TARGET){stop();document.getElementById("win").style.display="block";burst(arena,["🎉","💖","🌸","✨"],24)} };
+    h.onanimationend=()=>h.remove(); arena.appendChild(h);
+  },650);
+};
+
+/* confetti */
+function burst(el,em,n){
+  const r=el.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+Math.min(r.height,200)/2;
+  for(let i=0;i<n;i++){
+    const p=document.createElement("div"); p.className="pop"; p.textContent=em[i%em.length];
+    p.style.left=cx+"px"; p.style.top=cy+"px";
+    p.style.setProperty("--x",(Math.random()*300-150)+"px"); p.style.setProperty("--y",(Math.random()*-260-20)+"px");
+    document.body.appendChild(p); setTimeout(()=>p.remove(),1500);
+  }
+}
+route();
+</script>
+</body>
+</html>
